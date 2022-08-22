@@ -1,5 +1,6 @@
 // Permet d'afficher l'ensemble des informations d'un produit
 // sur sa page
+
 const showProduct = async () => {
     const productUrl = `http://localhost:3000/api/products/${getId()}`;
     const productData = await getRequest(productUrl);
@@ -24,3 +25,13 @@ const showProduct = async () => {
 }
 
 showProduct()
+
+const testPanier = () => {
+    const button = document.getElementById("addToCart");
+    button.addEventListener('click', () => {
+        // localStorage.setItem("title", ["ça marche !", "ça marche même très bien !!"]);
+        localStorage.setItem("title", document.getElementById("title").innerText)
+    })
+}
+
+testPanier()

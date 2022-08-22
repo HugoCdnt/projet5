@@ -17,4 +17,3 @@ const getId = () => {
     const id = url.substring((idIndex + 3));
     return id
 }
-
