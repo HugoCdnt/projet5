@@ -29,9 +29,23 @@ showProduct()
 const testPanier = () => {
     const button = document.getElementById("addToCart");
     button.addEventListener('click', () => {
-        // localStorage.setItem("title", ["ça marche !", "ça marche même très bien !!"]);
-        localStorage.setItem("title", document.getElementById("title").innerText)
+        // localStorage.setItem("title", document.getElementById("title").innerText)
+        // localStorage.setItem(getId(), [
+        //     "Nom : " + document.getElementById("title").value,
+        //     " Prix : " + document.getElementById("price").value
+        // ])
+
+        localStorage.setItem(getId(), [
+            localStorage.setItem("name", "test"),
+            localStorage.setItem("price", "99€")
+        ])
     })
 }
 
 testPanier()
+
+// Pour quantités, utiliser la méthode values() 
+// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Object/values
+
+// L'objectif va être de faire en sorte qu'en appelant une key
+// L'ensemble des données d'un produit puisse remonter
