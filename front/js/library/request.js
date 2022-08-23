@@ -17,3 +17,8 @@ const getId = () => {
     const id = url.substring((idIndex + 3));
     return id
 }
+
+const getProductData = async () => {
+    const productUrl = `http://localhost:3000/api/products/${getId()}`;
+    return await getRequest(productUrl);
+}
