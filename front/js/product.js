@@ -1,40 +1,19 @@
 // Permet d'afficher l'ensemble des informations d'un produit
 // sur sa page
 
-const showProduct = async () => {
-    let productData = await getProductData();
-    getElements();
-    const img = document.querySelector('.item__img');
-    // let colorOption = "";
-
-    // Moyen de faire les opérations ci-dessous "automatiquement"
-    // sur une seule ligne ?
-    title.innerHTML = `<h1 id="title">${productData.name}</h1>`;
-    price.innerHTML = `<span id="price">${productData.price}</span>`;
-    img.innerHTML = `<img src="${productData.imageUrl}" alt = ${productData.altTxt}>`
-    description.innerHTML = `<p id="description">${productData.description}</p>`;
-
-    // productData.colors.forEach((color) => {
-    //     colorOption += `
-    //         <option value="${color}">${color}</option>`
-    // });
-    // colors.innerHTML = colorOption;
-
-    let colorOptions = [productData.colors];
-    productData.colors.forEach((color) => {
-        colorOptions += `
-            <option value="${color}">${color}</option>`
-    });
-    colors.innerHTML = colorOptions;
+const getProductData = async () => {
+    const productUrl = `http://localhost:3000/api/products/${getId()}`;
+    return await getRequest(productUrl);
 }
 
-showProduct();
+const getElements = () => {
+    const title = document.getElementById('title');
+    const price = document.getElementById('price');
+    const description = document.getElementById('description');
+    const colors = document.getElementById('colors');
+}
 
-////////////// TEST PANIER ///////
-
-
-
-const addToCart = async () => {
+const addToBasket = async () => {
     let productData = await getProductData();
     const button = document.getElementById('addToCart');
     let quantity = document.getElementById('quantity');
@@ -49,7 +28,7 @@ const addToCart = async () => {
     })
 
     button.addEventListener('click', () => {
-        cart.add({
+        addCart({
             id: `${getId()}`,
             "name": `${productData.name}`,
             color: colors.value,
@@ -58,7 +37,37 @@ const addToCart = async () => {
     })
 }
 
-addToCart();
+const showProduct = async () => {
+    const productData = await getProductData();
+    getElements();
+    const img = document.querySelector('.item__img');
+
+    onload = window.parent.document.title = `${productData.name}`;
+
+
+    // Moyen de faire les opérations ci-dessous "automatiquement"
+    // sur une seule ligne ?
+    title.innerHTML = `<h1 id="title">${productData.name}</h1>`;
+    price.innerHTML = `<span id="price">${productData.price}</span>`;
+    img.innerHTML = `<img src="${productData.imageUrl}" alt = ${productData.altTxt}>`
+    description.innerHTML = `<p id="description">${productData.description}</p>`;
+
+    let colorOptions = [productData.colors];
+    productData.colors.forEach((color) => {
+        colorOptions += `
+            <option value="${color}">${color}</option>`
+    });
+    colors.innerHTML = colorOptions;
+
+    addToBasket();
+}
+
+showProduct();
+
+////////////// TEST PANIER ///////
+
+
+
 
 
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Object/values

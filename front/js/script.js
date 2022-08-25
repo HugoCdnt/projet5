@@ -10,7 +10,6 @@ const showProducts = async () => {
     //     return;
     // }
     listProducts.forEach((product) => {
-        console.log(product);
         cardsHTML += `
         <a href="./product.html?id=${product._id}">
             <article>
