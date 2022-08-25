@@ -28,12 +28,18 @@ const addToBasket = async () => {
     })
 
     button.addEventListener('click', () => {
-        addCart({
-            id: `${getId()}`,
-            "name": `${productData.name}`,
-            color: colors.value,
-            "price": `${productData.price}`
-        }, quantity.value)
+        if (quantity.value <= 0) {
+            alert("La quantité renseignée n'est pas valide. Veuillez renseigner un nombre entre 1 et 100 pour continuer.");
+        } else {
+            addCart({
+                id: `${getId()}`,
+                "name": `${productData.name}`,
+                color: colors.value,
+                "price": `${productData.price}`
+            }, quantity.value)
+
+            alert("Votre produit a bien été ajouté au panier")
+        }
     })
 }
 
@@ -63,7 +69,6 @@ const showProduct = async () => {
 }
 
 showProduct();
-
 ////////////// TEST PANIER ///////
 
 

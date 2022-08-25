@@ -5,8 +5,8 @@
 // complexe en chaîne de caractères.
 // le localStorage ne peut pas de base gérer d'objets complexes
 const getCart = () => {
-    let cart = localStorage.getItem("cart");
-    if (cart == null) {
+    const cart = localStorage.getItem("cart");
+    if (cart === null) {
         return [];
     } else {
         return JSON.parse(localStorage.getItem("cart"));
