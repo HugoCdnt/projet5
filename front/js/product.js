@@ -28,7 +28,7 @@ const addToBasket = async () => {
     })
 
     button.addEventListener('click', () => {
-        if (quantity.value <= 0) {
+        if (quantity.value <= 0 || quantity.value > 100) {
             alert("La quantité renseignée n'est pas valide. Veuillez renseigner un nombre entre 1 et 100 pour continuer.");
         } else {
             addCart({
