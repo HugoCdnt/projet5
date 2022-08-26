@@ -35,7 +35,8 @@ const addToBasket = async () => {
                 id: `${getId()}`,
                 "name": `${productData.name}`,
                 color: colors.value,
-                "price": `${productData.price}`
+                "img": `${productData.imageUrl}`,
+                "altTxt": `${productData.altTxt}`
             }, quantity.value)
 
             alert("Votre produit a bien été ajouté au panier")
@@ -53,15 +54,15 @@ const showProduct = async () => {
 
     // Moyen de faire les opérations ci-dessous "automatiquement"
     // sur une seule ligne ?
-    title.innerHTML = `<h1 id="title">${productData.name}</h1>`;
-    price.innerHTML = `<span id="price">${productData.price}</span>`;
-    img.innerHTML = `<img src="${productData.imageUrl}" alt = ${productData.altTxt}>`
-    description.innerHTML = `<p id="description">${productData.description}</p>`;
+    title.innerHTML = `<h1 id = "title" > ${productData.name}</h1> `;
+    price.innerHTML = `<span id = "price" > ${productData.price}</span> `;
+    img.innerHTML = `<img src = "${productData.imageUrl}" alt = ${productData.altTxt}> `;
+    description.innerHTML = `<p id = "description" > ${productData.description}</p> `;
 
     let colorOptions = [productData.colors];
     productData.colors.forEach((color) => {
         colorOptions += `
-            <option value="${color}">${color}</option>`
+            <option value = "${color}" > ${color}</option>`
     });
     colors.innerHTML = colorOptions;
 
