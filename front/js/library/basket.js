@@ -36,24 +36,24 @@ const removeFromCart = (product) => {
     saveCart(cart);
 }
 
-const changeQuantity = (product, quantity) => {
-    let cart = getCart();
-    let findProduct = cart.find(p => p.id == product.id);
-    if (findProduct != undefined) {
-        findProduct.quantity += quantity;
-        if (findProduct.quantity <= 0) {
-            removeFromCart(findProduct);
-        } else {
-            saveCart(cart);
-        }
-    }
-}
+// const changeQuantity = (product, quantity) => {
+//     let cart = getCart();
+//     let findProduct = cart.find(p => p.id == product.id);
+//     if (findProduct != undefined) {
+//         findProduct.quantity += quantity;
+//         if (findProduct.quantity <= 0) {
+//             removeFromCart(findProduct);
+//         } else {
+//             saveCart(cart);
+//         }
+//     }
+// }
 
 const getNumberProducts = () => {
     let cart = getCart();
     let number = 0;
     for (let product of cart) {
-        number += product.quantity;
+        number += `${product.quantity}`;
     }
     return number;
 }

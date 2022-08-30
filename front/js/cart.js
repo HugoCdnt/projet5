@@ -40,21 +40,14 @@ const initCart = async () => {
     });
 
     cartItems.innerHTML = cartItemsHTML;
-
 }
-
 initCart();
-
-
-
 
 const deleteProduct = async () => {
     const cart = await getCart();
     await initCart();
     const deleteButton = document.querySelectorAll('.deleteItem');
     const article = document.querySelectorAll('article');
-
-    console.log(cart);
 
     for (let l = 0; l < deleteButton.length; l++) {
         deleteButton[l].addEventListener('click', (event) => {
@@ -73,3 +66,72 @@ const deleteProduct = async () => {
 }
 
 deleteProduct();
+
+
+//////// TOTAL AND QUANTITIES SETTING ////////
+
+// const changeQuantity = async () => {
+//     const cart = await getCart();
+//     await initCart();
+//     const quantitySetting = document.querySelectorAll('.itemQuantity');
+// }
+
+// changeQuantity();
+
+const getTotal = async () => {
+    const cart = await getCart();
+    await initCart();
+
+    let totalQuantityElement = document.getElementById('totalQuantity');
+    let totalPriceElement = document.getElementById('totalPrice');
+
+    const getTotalQuantity = () => {
+        let totalQuantity = 0;
+        cart.forEach((product) => {
+            totalQuantity += parseInt(product.quantity);
+        });
+        totalQuantityElement.innerText = totalQuantity;
+    }
+
+    getTotalQuantity();
+
+    const getTotalPrice = async () => {
+        const productsUrl = 'http://localhost:3000/api/products/';
+        const listProducts = await getRequest(productsUrl);
+        let totalPrice = 0;
+        cart.forEach((product) => {
+            const findProduct = listProducts.find(p => p.id = product.id);
+            totalPrice += parseInt(product.quantity) * findProduct.price;
+        });
+        totalPriceElement.innerText = totalPrice;
+    }
+
+    getTotalPrice();
+}
+
+getTotal();
+
+
+/////////////////////////////////////////////////
+
+// const listProducts = await getRequest(productsUrl);
+// const findProduct = listProducts.find(p => p.id = product.id);
+
+// <p>${findProduct.price} €</p>
+
+
+// quantity.addEventListener('change', (e) => {
+//     quantity.value = e.target.value;
+// })
+
+// button.addEventListener('click', () => {
+//     if (quantity.value <= 0 || quantity.value > 100) {
+//         alert("La quantité renseignée n'est pas valide. Veuillez renseigner un nombre entre 1 et 100 pour continuer.");
+//     } else {
+//         addCart({
+//             id: `${getId()}` + " " + colors.value,
+//             "name": `${productData.name}`,
+//             color: colors.value,
+//             "img": `${productData.imageUrl}`,
+//             "altTxt": `${productData.altTxt}`
+//         }, quantity.value)
