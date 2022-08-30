@@ -32,7 +32,8 @@ const addToBasket = async () => {
             alert("La quantité renseignée n'est pas valide. Veuillez renseigner un nombre entre 1 et 100 pour continuer.");
         } else {
             addCart({
-                id: `${getId()}` + " " + colors.value,
+                id: `${getId()}`,
+                idColor: `${getId()}` + " " + colors.value,
                 "name": `${productData.name}`,
                 color: colors.value,
                 "img": `${productData.imageUrl}`,

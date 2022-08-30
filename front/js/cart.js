@@ -6,16 +6,19 @@ const initCart = async () => {
         window.location.href = `file:///Users/hugocadenat/Documents/Formation_de%CC%81v_web/Projet%205/P5%20-%20Kanap/front/html/index.html`;
     }
 
+    // const productsUrl = 'http://localhost:3000/api/products/';
+    // const listProducts = await getRequest(productsUrl);
+
+    // const productData = await getRequest(productsUrl);
     const productsUrl = 'http://localhost:3000/api/products/';
     const listProducts = await getRequest(productsUrl);
+
 
     const cartItems = document.getElementById('cart__items');
     let cartItemsHTML = "";
 
     cart.forEach((product) => {
-        let idWithoutColor = product.id.split(' ')[0];
-        const findProduct = listProducts.find(p => p._id = product.idWithoutColor);
-        console.log(findProduct);
+        let findProduct = listProducts.find(p => p._id === product.id);
 
         cartItemsHTML += `
         <article class="cart__item" data-id="${product.id}" data-color="${product.color}">
@@ -42,10 +45,10 @@ const initCart = async () => {
     });
 
     cartItems.innerHTML = cartItemsHTML;
-
-    console.log(cart);
 }
+
 initCart();
+
 
 
 //////// TOTAL AND QUANTITIES SETTING ////////
@@ -79,8 +82,9 @@ const getTotal = async () => {
         const productsUrl = 'http://localhost:3000/api/products/';
         const listProducts = await getRequest(productsUrl);
         let totalPrice = 0;
+
         cart.forEach((product) => {
-            const findProduct = listProducts.find(p => p.id = product.id);
+            const findProduct = listProducts.find(p => p._id === product.id);
             totalPrice += parseInt(product.quantity) * findProduct.price;
         });
         totalPriceElement.innerText = totalPrice;
@@ -104,8 +108,8 @@ const deleteProduct = async () => {
         deleteButton[l].addEventListener('click', (event) => {
             event.preventDefault();
 
-            let idSelectedProduct = cart[l].id;
-            let findProduct = cart.find(p => p.id === idSelectedProduct);
+            let idSelectedProduct = cart[l].idColor;
+            let findProduct = cart.find(p => p.idColor = idSelectedProduct);
             let articleSelected = article[l];
 
             articleSelected.remove();

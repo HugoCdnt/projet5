@@ -16,7 +16,7 @@ const getCart = () => {
 const addCart = (product, quantity) => {
     const cart = getCart();
     // const findProduct = cart.find(p => p.id === product.id && p.color === product.color);
-    const findProduct = cart.find(p => p.id === product.id);
+    const findProduct = cart.find(p => p.idColor === product.idColor);
     if (findProduct != undefined) {
         findProduct.quantity = parseInt(findProduct.quantity) + parseInt(quantity);
     } else {
@@ -32,7 +32,7 @@ const saveCart = (cart) => {
 
 const removeFromCart = (product) => {
     let cart = getCart();
-    cart = cart.filter(p => p.id != product.id);
+    cart = cart.filter(p => p.idColor != product.idColor);
     saveCart(cart);
 }
 
