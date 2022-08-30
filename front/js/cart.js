@@ -48,95 +48,32 @@ initCart();
 
 
 
-const testDelete = async () => {
+const deleteProduct = async () => {
     let cart = await getCart();
     await initCart();
     const deleteButton = document.querySelectorAll('.deleteItem');
     console.log(deleteButton);
 
+    let article = document.querySelectorAll('article');
+    console.log(article);
+
     for (let l = 0; l < deleteButton.length; l++) {
         deleteButton[l].addEventListener('click', (event) => {
             event.preventDefault();
 
-            // let idSelectedDelet = productSaveInLocalStorage[l].idSelectedProduct;
-            // let idSelectedDelet = cart[l].id + cart[l].color;
-            let idSelectedDelet = cart[l].id;
-            let findProduct = cart.find(p => p.id = idSelectedDelet)
+            let idSelectedProduct = cart[l].id;
+            let findProduct = cart.find(p => p.id = idSelectedProduct)
 
-            console.log(idSelectedDelet);
+            let articleSelected = article[l];
+
+            console.log(idSelectedProduct);
             console.log(findProduct);
 
-
+            articleSelected.remove();
             removeFromCart(findProduct);
+
         })
     }
 }
 
-testDelete();
-//////////////// TEST /////////////
-
-// Sélection des "boutons" supprimer
-// const deleteButton = document.querySelectorAll('deleteItem');
-// console.log(deleteButton);
-
-// Ajouter un eventListener sur le deleteButton
-// Lui dire de sélectionner l'article parent au clic
-// Ca permet d'avoir idSelectedProduct
-
-// Possible ensuite de lier cet idSelectedProduct avec
-// Le local storage. Puis supprimer le produit avec cet ID  
-
-
-// for (let l = 0; l < deleteButton.length; l++) {
-//     deleteButton[l].addEventListener('click', (event) => {
-//         event.preventDefault();
-
-//         // let idSelectedDelet = productSaveInLocalStorage[l].idSelectedProduct;
-//         let idSelectedDelet = cart[l];
-//         console.log(idSelectedDelet);
-
-//         let cart = getCart();
-//         cart = cart.filter(el => el.idSelectedProduct != idSelectedDelet);
-//     })
-// }
-
-
-
-///////////////// FIN TEST /////////////////
-
-
-// const deleteItemFromCart = () => {
-
-//     const removeFromCart = async () => {
-//         let cart = await getCart();
-//         await initCart();
-//         const items = document.querySelectorAll('.cart__item');
-//         // const deleteItem = document.querySelector('.deleteItem');
-//         const deleteItem = document.querySelectorAll('.deleteItem');
-
-//         items.forEach((product) => {
-//             deleteItem.forEach((deleteItem) => {
-//                 addEventListener('click', () => {
-//                     deleteItem.addEventListener('click', () => {
-//                         console.log(product.dataset.id + " " + product.dataset.color);
-//                         console.log(product);
-//                         // console.log(cart);
-
-//                         // cart = cart.filter(p => p.id != product.id);
-//                         // saveCart(cart);
-//                     })
-//                 })
-
-//             })
-
-//         });
-//     }
-//     removeFromCart();
-
-// }
-// deleteItemFromCart();
-
-
-
-//     // cart = cart.filter(p => p.id != product.id);
-//     // saveCart(cart);
+deleteProduct();
