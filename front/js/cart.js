@@ -13,7 +13,9 @@ const initCart = async () => {
     let cartItemsHTML = "";
 
     cart.forEach((product) => {
-        const findProduct = listProducts.find(p => p.id = product.id);
+        let idWithoutColor = product.id.split(' ')[0];
+        const findProduct = listProducts.find(p => p._id = product.idWithoutColor);
+        console.log(findProduct);
 
         cartItemsHTML += `
         <article class="cart__item" data-id="${product.id}" data-color="${product.color}">
@@ -40,32 +42,10 @@ const initCart = async () => {
     });
 
     cartItems.innerHTML = cartItemsHTML;
+
+    console.log(cart);
 }
 initCart();
-
-const deleteProduct = async () => {
-    const cart = await getCart();
-    await initCart();
-    const deleteButton = document.querySelectorAll('.deleteItem');
-    const article = document.querySelectorAll('article');
-
-    for (let l = 0; l < deleteButton.length; l++) {
-        deleteButton[l].addEventListener('click', (event) => {
-            event.preventDefault();
-
-            let idSelectedProduct = cart[l].id;
-
-            let findProduct = cart.find(p => p.id === idSelectedProduct);
-
-            let articleSelected = article[l];
-
-            articleSelected.remove();
-            removeFromCart(findProduct);
-        })
-    }
-}
-
-deleteProduct();
 
 
 //////// TOTAL AND QUANTITIES SETTING ////////
@@ -113,6 +93,28 @@ getTotal();
 
 
 /////////////////////////////////////////////////
+
+const deleteProduct = async () => {
+    const cart = await getCart();
+    await initCart();
+    const deleteButton = document.querySelectorAll('.deleteItem');
+    const article = document.querySelectorAll('article');
+
+    for (let l = 0; l < deleteButton.length; l++) {
+        deleteButton[l].addEventListener('click', (event) => {
+            event.preventDefault();
+
+            let idSelectedProduct = cart[l].id;
+            let findProduct = cart.find(p => p.id === idSelectedProduct);
+            let articleSelected = article[l];
+
+            articleSelected.remove();
+            removeFromCart(findProduct);
+        })
+    }
+}
+
+deleteProduct();
 
 // const listProducts = await getRequest(productsUrl);
 // const findProduct = listProducts.find(p => p.id = product.id);

@@ -51,9 +51,6 @@ const showProduct = async () => {
 
     onload = window.parent.document.title = `${productData.name}`;
 
-
-    // Moyen de faire les opérations ci-dessous "automatiquement"
-    // sur une seule ligne ?
     title.innerHTML = `<h1 id = "title" > ${productData.name}</h1> `;
     price.innerHTML = `<span id = "price" > ${productData.price}</span> `;
     img.innerHTML = `<img src = "${productData.imageUrl}" alt = ${productData.altTxt}> `;
