@@ -29,11 +29,11 @@ const saveCart = (cart) => {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// const removeFromCart = (product) => {
-//     let cart = getCart();
-//     cart = cart.filter(p => p.id != product.id);
-//     saveCart(cart);
-// }
+const removeFromCart = (product) => {
+    let cart = getCart();
+    cart = cart.filter(p => p.id != product.id);
+    saveCart(cart);
+}
 
 const changeQuantity = (product, quantity) => {
     let cart = getCart();
