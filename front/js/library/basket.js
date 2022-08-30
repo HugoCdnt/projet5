@@ -15,7 +15,8 @@ const getCart = () => {
 
 const addCart = (product, quantity) => {
     const cart = getCart();
-    const findProduct = cart.find(p => p.id === product.id && p.color === product.color);
+    // const findProduct = cart.find(p => p.id === product.id && p.color === product.color);
+    const findProduct = cart.find(p => p.id === product.id);
     if (findProduct != undefined) {
         findProduct.quantity = parseInt(findProduct.quantity) + parseInt(quantity);
     } else {

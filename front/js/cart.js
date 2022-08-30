@@ -49,29 +49,25 @@ initCart();
 
 
 const deleteProduct = async () => {
-    let cart = await getCart();
+    const cart = await getCart();
     await initCart();
     const deleteButton = document.querySelectorAll('.deleteItem');
-    console.log(deleteButton);
+    const article = document.querySelectorAll('article');
 
-    let article = document.querySelectorAll('article');
-    console.log(article);
+    console.log(cart);
 
     for (let l = 0; l < deleteButton.length; l++) {
         deleteButton[l].addEventListener('click', (event) => {
             event.preventDefault();
 
             let idSelectedProduct = cart[l].id;
-            let findProduct = cart.find(p => p.id = idSelectedProduct)
+
+            let findProduct = cart.find(p => p.id === idSelectedProduct);
 
             let articleSelected = article[l];
 
-            console.log(idSelectedProduct);
-            console.log(findProduct);
-
             articleSelected.remove();
             removeFromCart(findProduct);
-
         })
     }
 }
