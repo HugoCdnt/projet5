@@ -40,15 +40,6 @@ const initCart = async () => {
 
     cartItems.innerHTML = cartItemsHTML;
 
-    // Boucle permettant de modifier les quantités d'un produit
-    for (let i = 0; i < document.querySelectorAll('.itemQuantity').length; i++) {
-        document.querySelectorAll('.itemQuantity')[i].addEventListener('change', (event) => {
-            console.log("Change", event);
-            cart[i].quantity = event.target.value;
-            saveCart(cart);
-        })
-    }
-
     // Boucle permettant de supprimer un produit
     for (let i = 0; i < document.querySelectorAll('.deleteItem').length; i++) {
         document.querySelectorAll('.deleteItem')[i].addEventListener('click', (event) => {
@@ -65,6 +56,17 @@ const initCart = async () => {
         totalQuantity += parseInt(product.quantity);
     });
     document.getElementById('totalQuantity').innerText = totalQuantity;
+
+
+    // Boucle permettant de modifier les quantités d'un produit
+    for (let i = 0; i < document.querySelectorAll('.itemQuantity').length; i++) {
+        document.querySelectorAll('.itemQuantity')[i].addEventListener('change', (event) => {
+            totalQuantity = totalQuantity + parseInt(event.target.value) - parseInt(cart[i].quantity);
+            cart[i].quantity = parseInt(event.target.value);
+            document.getElementById('totalQuantity').innerText = totalQuantity;
+            saveCart(cart);
+        })
+    }
 
     // Calcul du prix total
     let totalPrice = 0;
