@@ -1,9 +1,41 @@
 // Permet d'afficher l'ensemble des informations d'un produit
 // sur sa page
 
+// Permet de récupérer l'ID d'un produit à partir de l'URL
+// de sa page
+const getId = () => {
+    const search = "id=";
+    const url = document.location.href;
+    const idIndex = url.lastIndexOf(search);
+    const id = url.substring((idIndex + 3));
+    return id
+}
+
 const getProductData = async () => {
-    const productUrl = `http://localhost:3000/api/products/${getId()}`;
-    return await getRequest(productUrl);
+
+    // Sortir le getId afin de trouver erreur
+    // puis tester si response -1
+
+    return await getRequest(`http://localhost:3000/api/products/${getId()}`);
+
+    // if (productUrl === 404 || productUrl === undefined) {
+    //     console.log("Oups, il y a une erreur");
+    // }
+    // return await getRequest(productUrl);
+
+    // if (productUrl !== 404 || productUrl !== undefined) {
+    //     return await getRequest(productUrl);
+    // } else {
+    //     console.log("Oups, il y a une erreur");
+    // }
+
+    // const productData = await getRequest(productUrl);
+    // if (productData.ok) {
+    //     return productData;
+    // } else {
+    //     console.log("Oups, il y a une erreur !");
+    // }
+    // window.location.href = `file:///Users/hugocadenat/Documents/Formation_de%CC%81v_web/Projet%205/P5%20-%20Kanap/front/html/index.html`;
 }
 
 const getElements = () => {
@@ -19,12 +51,12 @@ const addToBasket = async () => {
     let quantity = document.getElementById('quantity');
 
     let colors = document.getElementById('colors');
-    colors.addEventListener('change', (e) => {
-        colors.value = e.target.value;
+    colors.addEventListener('change', (event) => {
+        colors.value = event.target.value;
     })
 
-    quantity.addEventListener('change', (e) => {
-        quantity.value = e.target.value;
+    quantity.addEventListener('change', (event) => {
+        quantity.value = event.target.value;
     })
 
     button.addEventListener('click', () => {
@@ -47,6 +79,10 @@ const addToBasket = async () => {
 
 const showProduct = async () => {
     const productData = await getProductData();
+
+    // if (productData === 404 || productData === undefined) {
+    //     console.log("Oups, il y a une erreur");
+    // }
     getElements();
     const img = document.querySelector('.item__img');
 

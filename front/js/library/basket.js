@@ -36,33 +36,53 @@ const removeFromCart = (product) => {
     saveCart(cart);
 }
 
-// const changeQuantity = (product, quantity) => {
+// const getNumberProducts = () => {
 //     let cart = getCart();
-//     let findProduct = cart.find(p => p.id == product.id);
-//     if (findProduct != undefined) {
-//         findProduct.quantity += quantity;
-//         if (findProduct.quantity <= 0) {
-//             removeFromCart(findProduct);
-//         } else {
-//             saveCart(cart);
-//         }
+//     let number = 0;
+//     for (let product of cart) {
+//         number += `${product.quantity}`;
 //     }
+//     return number;
 // }
 
-const getNumberProducts = () => {
-    let cart = getCart();
-    let number = 0;
-    for (let product of cart) {
-        number += `${product.quantity}`;
-    }
-    return number;
-}
+// const getTotalPrice = () => {
+//     let cart = getCart();
+//     let total = 0;
+//     for (let product of cart) {
+//         total += product.quantity * product.price;
+//     }
+//     return total;
+// }
 
-const getTotalPrice = () => {
-    let cart = getCart();
-    let total = 0;
-    for (let product of cart) {
-        total += product.quantity * product.price;
-    }
-    return total;
-}
+// const getTotal = async () => {
+//     const cart = await getCart();
+//     await initCart();
+
+//     let totalQuantityElement = document.getElementById('totalQuantity');
+//     let totalPriceElement = document.getElementById('totalPrice');
+
+    // const getTotalQuantity = () => {
+    //     let totalQuantity = 0;
+    //     cart.forEach((product) => {
+    //         totalQuantity += parseInt(product.quantity);
+    //     });
+    //     totalQuantityElement.innerText = totalQuantity;
+    // }
+
+    // getTotalQuantity();
+
+    // const getTotalPrice = async () => {
+    //     const productsUrl = 'http://localhost:3000/api/products/';
+    //     const listProducts = await getRequest(productsUrl);
+    //     let totalPrice = 0;
+
+    //     cart.forEach((product) => {
+    //         const findProduct = listProducts.find(p => p._id === product.id);
+    //         totalPrice += parseInt(product.quantity) * findProduct.price;
+    //     });
+    //     totalPriceElement.innerText = totalPrice;
+    // }
+
+    // getTotalPrice();
+// }
+
