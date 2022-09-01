@@ -22,10 +22,12 @@ const addCart = (product, quantity) => {
     } else if (findProduct != undefined) {
         findProduct.quantity = parseInt(findProduct.quantity) + parseInt(quantity);
         alert("Votre produit a bien été ajouté au panier")
+        window.location.href = `file:///Users/hugocadenat/Documents/Formation_de%CC%81v_web/Projet%205/P5%20-%20Kanap/front/html/cart.html`;
     } else {
         product.quantity = quantity;
         cart.push(product);
         alert("Votre produit a bien été ajouté au panier")
+        window.location.href = `file:///Users/hugocadenat/Documents/Formation_de%CC%81v_web/Projet%205/P5%20-%20Kanap/front/html/cart.html`;
     }
     saveCart(cart);
 }

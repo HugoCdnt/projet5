@@ -66,6 +66,12 @@ const initCart = async () => {
 
         for (let i = 0; i < document.querySelectorAll('.itemQuantity').length; i++) {
             document.querySelectorAll('.itemQuantity')[i].addEventListener('change', (event) => {
+
+                if (event.target.value > 100) {
+                    event.target.value = (event.target.value - (event.target.value - 100));
+                } else if (event.target.value < 1) {
+                    event.target.value = 1;
+                }
                 totalPrice += ((parseInt(event.target.value) - parseInt(cart[i].quantity)) * listProducts.find(p => p._id === (cart)[i].id).price);
                 document.getElementById('totalPrice').innerText = totalPrice;
 
@@ -77,6 +83,7 @@ const initCart = async () => {
             })
         }
     })
+
 }
 
 initCart();
