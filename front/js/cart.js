@@ -50,33 +50,66 @@ const initCart = async () => {
         })
     }
 
-    // Calcul des quantités totales
+    // Calcul du total
+    let totalPrice = 0;
     let totalQuantity = 0;
+
     cart.forEach((product) => {
         totalQuantity += parseInt(product.quantity);
-    });
-    document.getElementById('totalQuantity').innerText = totalQuantity;
-
-
-    // Boucle permettant de modifier les quantités d'un produit
-    for (let i = 0; i < document.querySelectorAll('.itemQuantity').length; i++) {
-        document.querySelectorAll('.itemQuantity')[i].addEventListener('change', (event) => {
-            totalQuantity = totalQuantity + parseInt(event.target.value) - parseInt(cart[i].quantity);
-            cart[i].quantity = parseInt(event.target.value);
-            document.getElementById('totalQuantity').innerText = totalQuantity;
-            saveCart(cart);
-        })
-    }
-
-    // Calcul du prix total
-    let totalPrice = 0;
-    cart.forEach((product) => {
         totalPrice += parseInt(product.quantity) * listProducts.find(p => p._id === product.id).price;
-    });
-    document.getElementById('totalPrice').innerText = totalPrice;
-}
+        document.getElementById('totalPrice').innerText = totalPrice;
+        document.getElementById('totalQuantity').innerText = totalQuantity;
 
+        // Boucle permettant de modifier le prix total
+        // Et la quantité totale
+        // en temps réel en fonction des changements de quantités
+
+        for (let i = 0; i < document.querySelectorAll('.itemQuantity').length; i++) {
+            document.querySelectorAll('.itemQuantity')[i].addEventListener('change', (event) => {
+                totalPrice += ((parseInt(event.target.value) - parseInt(cart[i].quantity)) * listProducts.find(p => p._id === (cart)[i].id).price);
+                document.getElementById('totalPrice').innerText = totalPrice;
+
+                totalQuantity = totalQuantity + parseInt(event.target.value) - parseInt(cart[i].quantity);
+                cart[i].quantity = parseInt(event.target.value);
+                document.getElementById('totalQuantity').innerText = totalQuantity;
+
+                saveCart(cart);
+            })
+        }
+    })
+}
 initCart();
+
+
+// for (let i = 0; i < document.querySelectorAll('.itemQuantity').length; i++) {
+//     document.querySelectorAll('.itemQuantity')[i].addEventListener('change', (event) => {
+//         totalQuantity = totalQuantity + parseInt(event.target.value) - parseInt(cart[i].quantity);
+//         cart[i].quantity = parseInt(event.target.value);
+//         document.getElementById('totalQuantity').innerText = totalQuantity;
+//         saveCart(cart);
+//     });
+// }
+
+
+// for (let i = 0; i < document.querySelectorAll('.itemQuantity').length; i++) {
+//     document.querySelectorAll('.itemQuantity')[i].addEventListener('change', (event) => {
+//         totalQuantity = totalQuantity + parseInt(event.target.value) - parseInt(cart[i].quantity);
+//         cart[i].quantity = parseInt(event.target.value);
+//         document.getElementById('totalQuantity').innerText = totalQuantity;
+//         saveCart(cart);
+//     });
+// }
+
+
+// Boucle permettant de modifier les quantités d'un produit
+// for (let i = 0; i < document.querySelectorAll('.itemQuantity').length; i++) {
+//     document.querySelectorAll('.itemQuantity')[i].addEventListener('change', (event) => {
+//         totalQuantity = totalQuantity + parseInt(event.target.value) - parseInt(cart[i].quantity);
+//         cart[i].quantity = parseInt(event.target.value);
+//         document.getElementById('totalQuantity').innerText = totalQuantity;
+//         saveCart(cart);
+//     })
+// }
 
 
 /////////// DELETE AVEC FOREACH ////////////////////
@@ -126,5 +159,3 @@ initCart();
     //         })
     //     }
     // }
-
-// deleteProduct()
