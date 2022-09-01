@@ -15,13 +15,17 @@ const getCart = () => {
 
 const addCart = (product, quantity) => {
     const cart = getCart();
-    // const findProduct = cart.find(p => p.id === product.id && p.color === product.color);
     const findProduct = cart.find(p => p.idColor === product.idColor);
-    if (findProduct != undefined) {
+
+    if (findProduct != undefined && (parseInt(quantity) + parseInt(findProduct.quantity) > 100)) {
+        alert("La quantité d'un produit ne peut excéder 100");
+    } else if (findProduct != undefined) {
         findProduct.quantity = parseInt(findProduct.quantity) + parseInt(quantity);
+        alert("Votre produit a bien été ajouté au panier")
     } else {
         product.quantity = quantity;
         cart.push(product);
+        alert("Votre produit a bien été ajouté au panier")
     }
     saveCart(cart);
 }

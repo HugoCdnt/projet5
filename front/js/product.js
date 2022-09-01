@@ -59,7 +59,9 @@ const addToBasket = async () => {
         quantity.value = event.target.value;
     })
 
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
+        // let cart = await getCart();
+        // const findProduct = cart.find(p => p.idColor === product.idColor);
         if (quantity.value <= 0 || quantity.value > 100) {
             alert("La quantité renseignée n'est pas valide. Veuillez renseigner un nombre entre 1 et 100 pour continuer.");
         } else {
@@ -71,8 +73,6 @@ const addToBasket = async () => {
                 "img": `${productData.imageUrl}`,
                 "altTxt": `${productData.altTxt}`
             }, quantity.value)
-
-            alert("Votre produit a bien été ajouté au panier")
         }
     })
 }
