@@ -8,6 +8,10 @@ const getId = () => {
     const url = document.location.href;
     const idIndex = url.lastIndexOf(search);
     const id = url.substring((idIndex + 3));
+
+    // if (id === 404) {
+    //     console.log("Oups, il y a un problème");
+    // }
     return id
 }
 
