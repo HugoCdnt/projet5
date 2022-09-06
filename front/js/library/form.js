@@ -60,79 +60,46 @@ form.email.addEventListener('change', () => {
 document.getElementById('order').addEventListener('click', (event) => {
     event.preventDefault();
 
+    const body = {
+        contact: {
+            prénom: form.firstName.value,
+            nom: form.lastName.value,
+            adresse: form.address.value,
+            ville: form.city.value,
+            email: form.email.value
+        },
+        products: getCart()
+    };
+
+    const setOrder = fetch("https://jsonplaceholder.typicode.com/users", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    // const setOrder = fetch("http://localhost:3000/api/products/order/", {
+    //     method: "POST",
+    //     body: JSON.stringify(body),
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     }
+    // });
+
     if ((regExpName.test(form.firstName.value)) && (regExpName.test(form.lastName.value)) && (regExpAddress.test(form.address.value)) && (regExpCity.test(form.city.value)) && (regExpEmail.test(form.email.value))) {
-        addContact({
-            "prénom": form.firstName.value,
-            "nom": form.lastName.value,
-            "adresse": form.address.value,
-            "ville": form.city.value,
-            "email": form.email.value
-        });
+        setOrder.then(async (response) => {
+            try {
+                const content = await response.json();
+                console.log(content);
+                content.products.forEach((product) => { console.log(product.id) });
+            } catch (error) {
+                console.log(error);
+            }
+        })
         alert("Formulaire envoyé !");
     }
     else {
         alert("Il y a un problème");
     }
 });
-
-
-
-const body = {
-    contact: {
-        prénom: form.firstName.value,
-        nom: form.lastName.value,
-        adresse: form.address.value,
-        ville: form.city.value,
-        email: form.email.value
-    },
-    products: getCart()
-};
-
-
-const setOrder = fetch("https://jsonplaceholder.typicode.com/users", {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: {
-        "Content-Type": "application/json"
-    }
-});
-
-setOrder.then(async (response) => {
-    try {
-        const content = await response.json();
-        console.log(content);
-        content.products.forEach((product) => {
-            console.log(product.id);
-        });
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-
-
-
-
-// form.email.addEventListener('change', () => {
-//     const emailControl = () => {
-//         let regExpEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-//         if (regExpEmail.test(form.email.value)) {
-//             // return true;
-//         } else {
-//             alert("L'adresse email saisie n'est pas valide");
-//         }
-//     };
-//     emailControl();
-// });
-
-
-// form.firstName.addEventListener('change', () => {
-//     const firstNameControl = () => {
-//         let regExpFirstName = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,\.'-]+$/u;
-//         if (regExpFirstName.test(form.firstName.value)) {
-//         } else {
-//             alert("Le prénom saisi n'est pas valide");
-//         }
-//     }
-//     firstNameControl();
-// });
