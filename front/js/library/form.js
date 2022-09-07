@@ -28,7 +28,6 @@ form.lastName.addEventListener('change', () => {
 
 form.address.addEventListener('change', () => {
     if (regExpAddress.test(form.address.value)) {
-        // document.getElementById('addressErrorMsg').innerText = "";
         document.getElementById('addressErrorMsg').style.display = "none";
     } else {
         document.getElementById('addressErrorMsg').style.display = "inline";
@@ -60,24 +59,17 @@ form.email.addEventListener('change', () => {
 document.getElementById('order').addEventListener('click', (event) => {
     event.preventDefault();
 
-    const body = {
-        contact: {
-            prénom: form.firstName.value,
-            nom: form.lastName.value,
-            adresse: form.address.value,
-            ville: form.city.value,
-            email: form.email.value
-        },
-        products: getCart()
-    };
+    // console.log(body);
 
-    const setOrder = fetch("https://jsonplaceholder.typicode.com/users", {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+    // const setOrder = fetch("https://jsonplaceholder.typicode.com/users", {
+    //     method: "POST",
+    //     body: JSON.stringify(body),
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     }
+    // });
+
+    // console.log(setOrder);
 
     // const setOrder = fetch("http://localhost:3000/api/products/order/", {
     //     method: "POST",
@@ -87,19 +79,69 @@ document.getElementById('order').addEventListener('click', (event) => {
     //     }
     // });
 
+    // if ((regExpName.test(form.firstName.value)) && (regExpName.test(form.lastName.value)) && (regExpAddress.test(form.address.value)) && (regExpCity.test(form.city.value)) && (regExpEmail.test(form.email.value))) {
+    //     setOrder
+    //         .then(async (response) => {
+    //             try {
+    //                 const content = await response.json();
+    //                 console.log(content);
+    //                 content.products.forEach((product) => { console.log(product.id) });
+    //             } catch (error) {
+    //                 console.log(error);
+    //             }
+    //         })
+    //     alert("Formulaire envoyé !");
+    // }
+    // else {
+    //     alert("Il y a un problème");
+    // }
+
+    ///////////////////////////////////////////////
+
     if ((regExpName.test(form.firstName.value)) && (regExpName.test(form.lastName.value)) && (regExpAddress.test(form.address.value)) && (regExpCity.test(form.city.value)) && (regExpEmail.test(form.email.value))) {
-        setOrder.then(async (response) => {
-            try {
+        const url = "http://localhost:3000/api/products/order";
+        const cart = getCart();
+
+        const body = {
+            contact: {
+                firstName: form.firstName.value,
+                lastName: form.lastName.value,
+                address: form.address.value,
+                city: form.city.value,
+                email: form.email.value
+            },
+            products: cart.map(product => product.id)
+        };
+
+        const getOrder = async (url) => {
+            // try {
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            if (response.ok) {
                 const content = await response.json();
                 console.log(content);
-                content.products.forEach((product) => { console.log(product.id) });
-            } catch (error) {
+                alert("Formulaire envoyé !");
+            } else {
                 console.log(error);
             }
-        })
-        alert("Formulaire envoyé !");
+            // } catch (error) {
+            //     alert(`erreur qui vient du catch ${error}`)
+            // }
+        }
+
+        getOrder(url);
     }
-    else {
-        alert("Il y a un problème");
-    }
+
 });
+
+
+
+
+
+
+

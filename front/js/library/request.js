@@ -9,10 +9,12 @@ const getRequest = async (url) => {
             return await response.json();
         } else {
             alert(`Il semble y avoir une erreur de type ${response.status}, ce produit n'existe pas`);
-            window.location.href = `file:///Users/hugocadenat/Documents/Formation_de%CC%81v_web/Projet%205/P5%20-%20Kanap/front/html/index.html`;
+            window.location.href = `index.html`;
+            // return -1;
         }
     } catch (error) {
         alert(`erreur qui vient du catch ${error}`)
+        // return -1;
     }
 }
 
