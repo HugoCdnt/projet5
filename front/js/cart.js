@@ -46,6 +46,12 @@ const initCart = async () => {
             event.preventDefault();
 
             document.querySelectorAll('article')[i].remove();
+
+            totalQuantity -= (cart)[i].quantity;
+            totalPrice -= ((cart)[i].quantity * listProducts.find(p => p._id === (cart)[i].id).price);
+            document.getElementById('totalQuantity').innerText = totalQuantity;
+            document.getElementById('totalPrice').innerText = totalPrice;
+
             removeFromCart(cart.find(p => p.idColor = cart[i].idColor));
         })
     }

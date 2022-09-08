@@ -59,45 +59,6 @@ form.email.addEventListener('change', () => {
 document.getElementById('order').addEventListener('click', (event) => {
     event.preventDefault();
 
-    // console.log(body);
-
-    // const setOrder = fetch("https://jsonplaceholder.typicode.com/users", {
-    //     method: "POST",
-    //     body: JSON.stringify(body),
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     }
-    // });
-
-    // console.log(setOrder);
-
-    // const setOrder = fetch("http://localhost:3000/api/products/order/", {
-    //     method: "POST",
-    //     body: JSON.stringify(body),
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     }
-    // });
-
-    // if ((regExpName.test(form.firstName.value)) && (regExpName.test(form.lastName.value)) && (regExpAddress.test(form.address.value)) && (regExpCity.test(form.city.value)) && (regExpEmail.test(form.email.value))) {
-    //     setOrder
-    //         .then(async (response) => {
-    //             try {
-    //                 const content = await response.json();
-    //                 console.log(content);
-    //                 content.products.forEach((product) => { console.log(product.id) });
-    //             } catch (error) {
-    //                 console.log(error);
-    //             }
-    //         })
-    //     alert("Formulaire envoyé !");
-    // }
-    // else {
-    //     alert("Il y a un problème");
-    // }
-
-    ///////////////////////////////////////////////
-
     if ((regExpName.test(form.firstName.value)) && (regExpName.test(form.lastName.value)) && (regExpAddress.test(form.address.value)) && (regExpCity.test(form.city.value)) && (regExpEmail.test(form.email.value))) {
         const url = "http://localhost:3000/api/products/order";
         const cart = getCart();
