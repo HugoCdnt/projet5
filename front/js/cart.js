@@ -42,20 +42,38 @@ const initCart = async () => {
     cartItems.innerHTML = cartItemsHTML;
 
     // Boucle permettant de supprimer un produit
-    for (let i = 0; i < document.querySelectorAll('.deleteItem').length; i++) {
-        document.querySelectorAll('.deleteItem')[i].addEventListener('click', (event) => {
-            event.preventDefault();
+    // for (let i = 0; i < document.querySelectorAll('.deleteItem').length; i++) {
+    //     document.querySelectorAll('.deleteItem')[i].addEventListener('click', (event) => {
+    //         event.preventDefault();
 
-            document.querySelectorAll('article')[i].remove();
+    //         document.querySelectorAll('article')[i].remove();
 
-            totalQuantity -= (cart)[i].quantity;
-            totalPrice -= ((cart)[i].quantity * listProducts.find(p => p._id === (cart)[i].id).price);
+    //         totalQuantity -= (cart)[i].quantity;
+    //         totalPrice -= ((cart)[i].quantity * listProducts.find(p => p._id === (cart)[i].id).price);
+    //         document.getElementById('totalQuantity').innerText = totalQuantity;
+    //         document.getElementById('totalPrice').innerText = totalPrice;
+
+    //         removeFromCart(cart.find(p => p.idColor = cart[i].idColor));
+    //     })
+    // }
+
+    // for (let i = 0; i < document.querySelectorAll('.deleteItem').length; i++) {
+    document.querySelectorAll('.deleteItem').forEach((button) => {
+        button.addEventListener('click', () => {
+            const idColorArticle = ((button.parentNode.parentNode.parentNode.parentNode.dataset.id) + " " + (button.parentNode.parentNode.parentNode.parentNode.dataset.color));
+            const productArticle = button.parentNode.parentNode.parentNode.parentNode.dataset.id;
+            const productCart = cart.find(p => p.idColor === idColorArticle);
+
+            totalQuantity -= productCart.quantity;
             document.getElementById('totalQuantity').innerText = totalQuantity;
+
+            totalPrice -= (productCart.quantity * listProducts.find(p => p._id === productCart.id).price);
             document.getElementById('totalPrice').innerText = totalPrice;
 
-            removeFromCart(cart.find(p => p.idColor = cart[i].idColor));
-        })
-    }
+            removeFromCart(cart.find(p => p.idColor === idColorArticle));
+            button.parentNode.parentNode.parentNode.parentNode.remove();
+        });
+    });
 
     // Calcul du total
     let totalPrice = 0;
