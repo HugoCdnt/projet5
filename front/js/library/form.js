@@ -4,6 +4,7 @@ const regExpAddress = /^\s*\S+(?:\s+\S+){2}$/;
 const regExpCity = /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/;
 const regExpEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
+let orderIdNumber = "";
 
 // Ajout de conditions sur chaque input du formulaire
 // Avec des regExp
@@ -74,31 +75,37 @@ document.getElementById('order').addEventListener('click', (event) => {
             products: cart.map(product => product.id)
         };
 
-        const getOrder = async (url) => {
-            // try {
-            const response = await fetch(url, {
-                method: "POST",
-                body: JSON.stringify(body),
-                headers: {
-                    "Content-Type": "application/json"
+        const setOrder = async (url) => {
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(body),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+                if (response.ok) {
+                    const content = await response.json();
+                    console.log(content);
+                    orderIdNumber = content.orderId;
+                    alert("Formulaire envoyé !");
+                    window.location.href = `confirmation.html?orderId=${content.orderId}`;
+                } else {
+                    console.log(error);
                 }
-            });
-            if (response.ok) {
-                const content = await response.json();
-                console.log(content);
-                alert("Formulaire envoyé !");
-            } else {
-                console.log(error);
+            } catch (error) {
+                alert(`erreur qui vient du catch ${error}`)
             }
-            // } catch (error) {
-            //     alert(`erreur qui vient du catch ${error}`)
-            // }
         }
 
-        getOrder(url);
-    }
+        setOrder(url);
+
+
+    };
 
 });
+
+
 
 
 

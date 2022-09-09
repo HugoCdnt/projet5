@@ -7,6 +7,7 @@ const initCart = async () => {
     }
 
     const listProducts = await getRequest('http://localhost:3000/api/products/');
+
     const cartItems = document.getElementById('cart__items');
     let cartItemsHTML = "";
 

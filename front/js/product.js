@@ -21,6 +21,7 @@ const getProductData = async () => {
     // puis tester si response -1
 
     return await getRequest(`http://localhost:3000/api/products/${getId()}`);
+    console.log(getId());
 
     // if (productUrl === 404 || productUrl === undefined) {
     //     console.log("Oups, il y a une erreur");
