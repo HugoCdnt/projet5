@@ -4,8 +4,6 @@ const regExpAddress = /^\s*\S+(?:\s+\S+){2}$/;
 const regExpCity = /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/;
 const regExpEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-let orderIdNumber = "";
-
 // Ajout de conditions sur chaque input du formulaire
 // Avec des regExp
 
@@ -86,8 +84,6 @@ document.getElementById('order').addEventListener('click', (event) => {
                 });
                 if (response.ok) {
                     const content = await response.json();
-                    console.log(content);
-                    orderIdNumber = content.orderId;
                     alert("Formulaire envoyé !");
                     window.location.href = `confirmation.html?orderId=${content.orderId}`;
                 } else {

@@ -41,27 +41,13 @@ const initCart = async () => {
 
     cartItems.innerHTML = cartItemsHTML;
 
-    // Boucle permettant de supprimer un produit
-    // for (let i = 0; i < document.querySelectorAll('.deleteItem').length; i++) {
-    //     document.querySelectorAll('.deleteItem')[i].addEventListener('click', (event) => {
-    //         event.preventDefault();
+    // EventListener contenant une fonction permettant de supprimer 
+    // les articles du panier et de modifier le total en temps réel
 
-    //         document.querySelectorAll('article')[i].remove();
-
-    //         totalQuantity -= (cart)[i].quantity;
-    //         totalPrice -= ((cart)[i].quantity * listProducts.find(p => p._id === (cart)[i].id).price);
-    //         document.getElementById('totalQuantity').innerText = totalQuantity;
-    //         document.getElementById('totalPrice').innerText = totalPrice;
-
-    //         removeFromCart(cart.find(p => p.idColor = cart[i].idColor));
-    //     })
-    // }
-
-    // for (let i = 0; i < document.querySelectorAll('.deleteItem').length; i++) {
     document.querySelectorAll('.deleteItem').forEach((button) => {
         button.addEventListener('click', () => {
-            const idColorArticle = ((button.parentNode.parentNode.parentNode.parentNode.dataset.id) + " " + (button.parentNode.parentNode.parentNode.parentNode.dataset.color));
-            const productArticle = button.parentNode.parentNode.parentNode.parentNode.dataset.id;
+            const article = button.parentNode.parentNode.parentNode.parentNode;
+            const idColorArticle = ((article.dataset.id) + " " + (article.dataset.color));
             const productCart = cart.find(p => p.idColor === idColorArticle);
 
             totalQuantity -= productCart.quantity;
