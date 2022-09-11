@@ -95,6 +95,52 @@ const initCart = async () => {
         }
     })
 
+    document.getElementById('order').addEventListener('click', (event) => {
+        event.preventDefault();
+
+        if ((regExpName.test(form.firstName.value)) && (regExpName.test(form.lastName.value)) && (regExpAddress.test(form.address.value)) && (regExpCity.test(form.city.value)) && (regExpEmail.test(form.email.value))) {
+            const url = "http://localhost:3000/api/products/order";
+            const cart = getCart();
+
+            const body = {
+                contact: {
+                    firstName: form.firstName.value,
+                    lastName: form.lastName.value,
+                    address: form.address.value,
+                    city: form.city.value,
+                    email: form.email.value
+                },
+                products: cart.map(product => product.id)
+            };
+
+            const setOrder = async (url) => {
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        body: JSON.stringify(body),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    });
+                    if (response.ok) {
+                        const content = await response.json();
+                        alert("Formulaire envoyé !");
+                        window.location.href = `confirmation.html?orderId=${content.orderId}`;
+                    } else {
+                        console.log(error);
+                    }
+                } catch (error) {
+                    alert(`erreur qui vient du catch ${error}`)
+                }
+            }
+
+            setOrder(url);
+
+
+        };
+
+    });
+
 }
 
 initCart();
