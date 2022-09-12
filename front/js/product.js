@@ -3,25 +3,13 @@
 
 // Permet de récupérer l'ID d'un produit à partir de l'URL
 // de sa page
-const getId = () => {
-    const search = "id=";
-    const url = document.location.href;
-    const idIndex = url.lastIndexOf(search);
-    const id = url.substring((idIndex + 3));
-
-    // if (id === 404) {
-    //     console.log("Oups, il y a un problème");
-    // }
-    return id
-}
 
 const getProductData = async () => {
 
     // Sortir le getId afin de trouver erreur
     // puis tester si response -1
 
-    return await getRequest(`http://localhost:3000/api/products/${getId()}`);
-    console.log(getId());
+    return await getRequest(`http://localhost:3000/api/products/${getURLParam(window.location.href, 'id')}`);
 
     // if (productUrl === 404 || productUrl === undefined) {
     //     console.log("Oups, il y a une erreur");
@@ -71,8 +59,8 @@ const addToBasket = async () => {
             alert("La quantité renseignée n'est pas valide. Veuillez renseigner un nombre entre 1 et 100 pour continuer.");
         } else {
             addCart({
-                id: `${getId()}`,
-                idColor: `${getId()}` + " " + colors.value,
+                id: `${getURLParam(window.location.href, 'id')}`,
+                idColor: `${getURLParam(window.location.href, 'id')}` + " " + colors.value,
                 "name": `${productData.name}`,
                 color: colors.value,
                 "img": `${productData.imageUrl}`,

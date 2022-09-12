@@ -18,10 +18,22 @@ const getRequest = async (url) => {
     }
 }
 
-// const getRequest = async (url) => {
-//     const response = await fetch(url);
-//     if (response.ok) {
-//         return await response.json();
-//     }
-//     return -1;
-// }
+const postRequest = async (url, body) => {
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if (response.ok) {
+            return response.json();
+        } else {
+            console.log(error);
+        }
+    } catch (error) {
+        alert(`erreur qui vient du catch ${error}`)
+    }
+}
+

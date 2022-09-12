@@ -113,25 +113,10 @@ const initCart = async () => {
                 products: cart.map(product => product.id)
             };
 
-            const setOrder = async (url) => {
-                try {
-                    const response = await fetch(url, {
-                        method: "POST",
-                        body: JSON.stringify(body),
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    });
-                    if (response.ok) {
-                        const content = await response.json();
-                        alert("Formulaire envoyé !");
-                        window.location.href = `confirmation.html?orderId=${content.orderId}`;
-                    } else {
-                        console.log(error);
-                    }
-                } catch (error) {
-                    alert(`erreur qui vient du catch ${error}`)
-                }
+            const setOrder = async () => {
+                const content = await postRequest(url, body);
+                alert("Formulaire envoyé !");
+                window.location.href = `confirmation.html?orderId=${content.orderId}`;
             }
 
             setOrder(url);
