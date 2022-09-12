@@ -1,3 +1,5 @@
+// Fonction permettant de générer le contenu de la page Panier
+
 const initCart = async () => {
     let cart = getCart();
 
@@ -11,6 +13,8 @@ const initCart = async () => {
     const cartItems = document.getElementById('cart__items');
     let cartItemsHTML = "";
 
+
+    // Récupération des informations de chaque produit pour générer le code HTML de chaque article présent dans le panier
 
     cart.forEach((product) => {
 
@@ -61,7 +65,7 @@ const initCart = async () => {
         });
     });
 
-    // Calcul du total
+    // Calcul et affichage du total
     let totalPrice = 0;
     let totalQuantity = 0;
 
@@ -71,8 +75,8 @@ const initCart = async () => {
         document.getElementById('totalPrice').innerText = totalPrice;
         document.getElementById('totalQuantity').innerText = totalQuantity;
 
-        // Boucle permettant de modifier le prix total
-        // Et la quantité totale
+
+        // Boucle permettant de modifier le prix total et la quantité totale
         // en temps réel en fonction des changements de quantités
 
         for (let i = 0; i < document.querySelectorAll('.itemQuantity').length; i++) {
@@ -94,6 +98,9 @@ const initCart = async () => {
             })
         }
     })
+
+
+    // Event listener permettant d'envoyer notre requête POST à l'API à la condition que les données du formulaire soient valides
 
     document.getElementById('order').addEventListener('click', (event) => {
         event.preventDefault();

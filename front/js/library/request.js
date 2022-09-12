@@ -4,7 +4,6 @@
 const getRequest = async (url) => {
     try {
         const response = await fetch(url);
-        // console.log( response);
         if (response.ok) {
             return await response.json();
         } else {
@@ -18,6 +17,8 @@ const getRequest = async (url) => {
     }
 }
 
+// Fonction permettant de poster une requête vers l'API, prenant en paramètres l'URL vers laquelle envoyer les infos
+// et le corps de la requête 
 const postRequest = async (url, body) => {
     try {
         const response = await fetch(url, {

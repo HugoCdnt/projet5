@@ -1,9 +1,6 @@
-
-
-
-// Le JSON.stringify va permettre de transformer un object
-// complexe en chaîne de caractères.
-// le localStorage ne peut pas de base gérer d'objets complexes
+// Fonction permettant soit d'accéder au "panier" s'il existe, soit de le créer s'il n'existe pas encore
+// Le JSON.stringify va permettre de transformer un object complexe en chaîne de caractères.
+// Le localStorage ne peut pas de base gérer d'objets complexes
 const getCart = () => {
     const cart = localStorage.getItem("cart");
     if (cart === null) {
@@ -12,6 +9,10 @@ const getCart = () => {
         return JSON.parse(localStorage.getItem("cart"));
     }
 }
+
+
+// Fonction permettant d'ajouter un produit au panier, prenant en arguments le produit en question
+// et les quantités à ajouter
 
 const addCart = (product, quantity) => {
     const cart = getCart();
@@ -32,9 +33,14 @@ const addCart = (product, quantity) => {
     saveCart(cart);
 }
 
+// Fonction permettant de sauvegarder le panier
+
 const saveCart = (cart) => {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
+
+
+// Fonction permettant de supprimer un article du panier
 
 const removeFromCart = (product) => {
     let cart = getCart();

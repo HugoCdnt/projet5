@@ -1,14 +1,11 @@
-// Permet d'afficher l'ensemble des informations des produits
-// sur la page d'accueil
+// Permet d'afficher certaines informations des produits sur la page d'accueil : photo, nom, début de description
+
 const showProducts = async () => {
     const productsUrl = 'http://localhost:3000/api/products/';
     const items = document.getElementById("items");
     const listProducts = await getRequest(productsUrl);
     let cardsHTML = "";
-    // if (listProduct === -1) {
-    //     alert("Une erreur est survenue");
-    //     return;
-    // }
+
     listProducts.forEach((product) => {
         cardsHTML += `
         <a href="./product.html?id=${product._id}">
