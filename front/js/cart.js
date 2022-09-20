@@ -122,14 +122,15 @@ const initCart = async () => {
 
             const setOrder = async () => {
                 const content = await postRequest(url, body);
-                alert("Formulaire envoyé !");
+                alert("Merci pour votre commande.");
                 window.location.href = `confirmation.html?orderId=${content.orderId}`;
             }
 
             setOrder(url);
 
-
-        };
+        } else {
+            alert("Merci de remplir correctement les champs du formulaire afin de finaliser votre commande.")
+        }
 
     });
 

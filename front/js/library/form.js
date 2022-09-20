@@ -1,11 +1,10 @@
 // RegExp permettant de contrôler les champs du formulaire de la page panier
 
 const form = document.querySelector('.cart__order__form');
-const regExpName = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,\.'-]+$/u;
+const regExpName = /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/;
 const regExpAddress = /^\s*\S+(?:\s+\S+){2}$/;
 const regExpCity = /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/;
 const regExpEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
 
 // Ajout de conditions sur chaque input du formulaire avec les RegExp paramétrées plus haut
 
@@ -45,8 +44,8 @@ form.city.addEventListener('change', () => {
     }
 });
 
-form.email.addEventListener('change', () => {
-    if (regExpEmail.test(form.email.value)) {
+form.email.addEventListener('input', () => {
+    if ((regExpEmail.test(form.email.value))) {
         document.getElementById('emailErrorMsg').style.display = "none";
     } else {
         document.getElementById('emailErrorMsg').style.display = "inline";
